@@ -1,13 +1,15 @@
 require 'cuba'
+require 'erb'
 
 Cuba.define do
   on true do
-    agent = req.user_agent
-
-    res.write <<-HTML
-      User-Agent: #{req.user_agent}<br>
-      IP: #{req.ip}
+    template = <<-HTML
+      <% for (k,v) in req.env %>
+      <div><%= k %>: <%= v %></div>
+      <% end %>
     HTML
+
+    res.write ERB.new(template, 0, '>').result(binding)
   end
 end
 

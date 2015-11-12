@@ -4,7 +4,7 @@ require 'erb'
 Cuba.define do
   on true do
     template = <<-HTML
-      <%- for (k,v) in req.env -%>
+      <%- for (k,v) in env -%>
       <div><%= k %>: <%= v %></div>
       <%- end -%>
     HTML
